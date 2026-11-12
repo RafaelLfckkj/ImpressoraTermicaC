@@ -264,7 +264,7 @@ void imprimirTexto(void)
 
 void imprimirQRCode(void)
 {
-   
+    char textoQRCode[200];
 
     if (!conexaoAberta)
     {
@@ -273,8 +273,10 @@ void imprimirQRCode(void)
     }
     
     if(conexaoAberta){
-        ImpressaoQRCode("Teste de impressao", 6, 4);
-        corte(5);
+        printf("Digite o texto do QR Code: ");
+        scanf("%s", textoQRCode);
+        ImpressaoQRCode(textoQRCode, 6, 4);
+        Corte(5);
     }else{
         printf("Erro: Conexao nao esta aberta.\n");
     }
