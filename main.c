@@ -264,6 +264,20 @@ void imprimirTexto(void)
 
 void imprimirQRCode(void)
 {
+   
+
+    if (!conexaoAberta)
+    {
+        printf("Conexao fechada. Abra a conexao antes (opcao 2).\n");
+        return;
+    }
+    
+    if(conexaoAberta){
+        ImpressaoQRCode("Teste de impressao", 6, 4);
+        corte(5);
+    }else{
+        printf("Erro: Conexao nao esta aberta.\n");
+    }
 }
 
 void imprimirCodigoBarras(void)
