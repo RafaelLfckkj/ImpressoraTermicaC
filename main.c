@@ -284,10 +284,66 @@ void imprimirQRCode(void)
 
 void imprimirCodigoBarras(void)
 {
+    if (!conexaoAberta)
+    {
+        printf("Conexao fechada. Abra a conexao antes (opcao 2).\n");
+        return;
+    }
+
+    if(conexaoAberta){
+
+        char codigoBarras[200];
+        printf("Digite o codigo de barras: ");
+        scanf("%s", codigoBarras);
+        int retorno = ImpressaoCodigoBarras(1, codigoBarras, 100, 2, 1);
+        Corte(5);
+
+        if (retorno == 0)
+        {
+            printf("Codigo de barras impresso com sucesso!\n");
+        }
+        else
+        {
+            printf("Erro ao imprimir codigo de barras. Codigo: %d\n", retorno);
+        }
+    }else{
+        printf("Erro: Conexao nao esta aberta.\n");
+    }
 }
 
 void imprimirXMLSAT(void)
 {
+
+    if (!conexaoAberta)
+    {
+        printf("Conexao fechada. Abra a conexao antes (opcao 2).\n");
+        return;
+    }
+
+    if(conexaoAberta){
+        char *dadosXML = lerArquivo("XMLSAT.xml");
+        if (dadosXML == NULL)
+        {
+            printf("Erro ao ler o arquivo XMLSAT.xml.\n");
+            return;
+        }
+
+        int retorno = ImprimeXMLSAT(dadosXML, 0);
+        free(dadosXML);
+
+        if (retorno == 0)
+        {
+            printf("XML SAT impresso com sucesso!\n");
+        }
+        else
+        {
+            printf("Erro ao imprimir XML SAT. Codigo: %d\n", retorno);
+        }
+
+    }else{
+        printf("Erro: Conexao nao esta aberta.\n");
+    }
+
 
     /* le o arquivo XML (na raiz do projeto) para a memoria */
     // char *dadosXML = lerArquivo("XMLSAT.xml");
@@ -296,20 +352,101 @@ void imprimirXMLSAT(void)
 void imprimirXMLCancelamentoSAT(void)
 {
 
+    if (!conexaoAberta)
+    {
+        printf("Conexao fechada. Abra a conexao antes (opcao 2).\n");
+        return;
+    }
+
+    if(conexaoAberta){
+        char *dadosXML = lerArquivo("CANC_SAT.xml");
+        if (dadosXML == NULL)
+        {
+            printf("Erro ao ler o arquivo CANC_SAT.xml.\n");
+            return;
+        }
+
+        int retorno = ImprimeXMLCancelamentoSAT(dadosXML, ASS_QRCODE, 0);
+        free(dadosXML);
+
+        if (retorno == 0)
+        {
+            printf("XML Cancelamento SAT impresso com sucesso!\n");
+        }
+        else
+        {
+            printf("Erro ao imprimir XML Cancelamento SAT. Codigo: %d\n", retorno);
+        }
+
+
     /* le o arquivo XML (na raiz do projeto) para a memoria */
     // char *dadosXML = lerArquivo("CANC_SAT.xml");
+    }
 }
 
-void abrirGavetaElgin(void)
-{
+void abrirGavetaElgin(void){
+    if (!conexaoAberta)
+    {
+        printf("Conexao fechada. Abra a conexao antes (opcao 2).\n");
+        return;
+    }
+
+    if(conexaoAberta){
+        int retorno = AbreGavetaElgin(1, 100, 100);
+        if (retorno == 0)
+        {
+            printf("Gaveta aberta com sucesso!\n");
+        }
+        else
+        {
+            printf("Erro ao abrir gaveta. Codigo: %d\n", retorno);
+        }
+
+    }
 }
 
 void abrirGaveta(void)
 {
+    if (!conexaoAberta)
+    {
+        printf("Conexao fechada. Abra a conexao antes (opcao 2).\n");
+        return;
+    }
+
+    if(conexaoAberta){
+        int retorno = AbreGaveta(1, 100, 100);
+        if (retorno == 0)
+        {
+            printf("Gaveta aberta com sucesso!\n");
+        }
+        else
+        {
+            printf("Erro ao abrir gaveta. Codigo: %d\n", retorno);
+        }
+
+    }
 }
 
 void emitirSinalSonoro(void)
 {
+    if (!conexaoAberta)
+    {
+        printf("Conexao fechada. Abra a conexao antes (opcao 2).\n");
+        return;
+    }
+
+    if(conexaoAberta){
+        int retorno = SinalSonoro(3, 100, 100);
+        if (retorno == 0)
+        {
+            printf("Sinal sonoro emitido com sucesso!\n");
+        }
+        else
+        {
+            printf("Erro ao emitir sinal sonoro. Codigo: %d\n", retorno);
+        }
+
+    }
 }
 
 int fazerLogin(void)
